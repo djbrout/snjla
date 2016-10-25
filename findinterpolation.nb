@@ -1,0 +1,268 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      9935,        259]
+NotebookOptionsPosition[      9535,        240]
+NotebookOutlinePosition[      9889,        256]
+CellTagsIndexPosition[      9846,        253]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"JLAdata", "=", 
+   RowBox[{"Import", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<JLA.tsv\>\""}], 
+     ",", "\"\<Table\>\""}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.642578854674802*^9, 3.642578861519318*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"interpolation", "=", "\[IndentingNewLine]", 
+    RowBox[{"ParallelTable", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "Z", ",", "\[CapitalOmega]m", ",", "\[CapitalOmega]l", ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Piecewise", "[", 
+         RowBox[{
+          RowBox[{"{", " ", 
+           RowBox[{"(*", 
+            RowBox[{"CHECK", " ", "IF", " ", "BIG", " ", "BANG"}], "*)"}], 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"10000", ",", 
+              RowBox[{
+               RowBox[{"\[CapitalOmega]m", "\[LessEqual]", ".5"}], " ", "&&", 
+               " ", 
+               RowBox[{"\[CapitalOmega]l", "\[GreaterEqual]", " ", 
+                RowBox[{"4", 
+                 RowBox[{"Limit", "[", 
+                  RowBox[{
+                   RowBox[{"\[CapitalOmega]", "  ", 
+                    RowBox[{
+                    RowBox[{"Cosh", "[", 
+                    RowBox[{
+                    RowBox[{"1", "/", "3."}], " ", "*", " ", 
+                    RowBox[{"ArcCosh", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", "\[CapitalOmega]"}], ")"}], "/", 
+                    "\[CapitalOmega]"}], "]"}]}], "]"}], "^", "3"}]}], ",", 
+                   RowBox[{
+                   "\[CapitalOmega]", "\[Rule]", "\[CapitalOmega]m"}]}], 
+                  "]"}]}]}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{"10001", ",", 
+              RowBox[{
+               RowBox[{"\[CapitalOmega]m", ">=", ".5"}], " ", "&&", " ", 
+               RowBox[{"\[CapitalOmega]l", "\[GreaterEqual]", " ", 
+                RowBox[{"4", " ", 
+                 RowBox[{"Limit", "[", 
+                  RowBox[{
+                   RowBox[{"\[CapitalOmega]", " ", 
+                    RowBox[{
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"1", "/", "3."}], " ", "*", " ", 
+                    RowBox[{"ArcCos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", "\[CapitalOmega]"}], ")"}], "/", 
+                    "\[CapitalOmega]"}], "]"}]}], "]"}], "^", "3"}]}], ",", 
+                   RowBox[{
+                   "\[CapitalOmega]", "\[Rule]", "\[CapitalOmega]m"}]}], 
+                  "]"}]}]}]}]}], "}"}]}], "}"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"1", "+", "Z"}], ")"}], "*", "\[IndentingNewLine]", 
+           RowBox[{"Piecewise", "[", 
+            RowBox[{
+             RowBox[{"{", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"1", "/", 
+                   RowBox[{"Sqrt", "[", 
+                    RowBox[{
+                    "1", "-", "\[CapitalOmega]m", "-", "\[CapitalOmega]l"}], 
+                    "]"}]}], 
+                  RowBox[{"Sinh", "[", 
+                   RowBox[{
+                    RowBox[{"Sqrt", "[", 
+                    RowBox[{
+                    "1", "-", "\[CapitalOmega]m", "-", "\[CapitalOmega]l"}], 
+                    "]"}], 
+                    RowBox[{"NIntegrate", "[", 
+                    RowBox[{
+                    RowBox[{"1", "/", 
+                    RowBox[{"Sqrt", "[", 
+                    RowBox[{
+                    RowBox[{"\[CapitalOmega]m", "*", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"1", "+", "x"}], ")"}], "^", "3"}]}], "+", 
+                    "\[CapitalOmega]l", "+", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    "1", "-", "\[CapitalOmega]m", "-", "\[CapitalOmega]l"}], 
+                    ")"}], 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"1", "+", "x"}], ")"}], "^", "2"}]}]}], "]"}]}], 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", "0", ",", "Z"}], "}"}]}], "]"}]}], 
+                   "]"}]}], ",", 
+                 RowBox[{
+                  RowBox[{
+                  "1", "-", "\[CapitalOmega]m", "-", "\[CapitalOmega]l"}], 
+                  ">", "0"}]}], "}"}], ",", "\[IndentingNewLine]", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"1", "/", 
+                   RowBox[{"Sqrt", "[", 
+                    RowBox[{
+                    RowBox[{"-", "1"}], "+", "\[CapitalOmega]m", "+", 
+                    "\[CapitalOmega]l"}], "]"}]}], 
+                  RowBox[{"Sin", "[", 
+                   RowBox[{
+                    RowBox[{"Sqrt", "[", 
+                    RowBox[{
+                    RowBox[{"-", "1"}], "+", "\[CapitalOmega]m", "+", 
+                    "\[CapitalOmega]l"}], "]"}], 
+                    RowBox[{"NIntegrate", "[", 
+                    RowBox[{
+                    RowBox[{"1", "/", 
+                    RowBox[{"Sqrt", "[", 
+                    RowBox[{
+                    RowBox[{"\[CapitalOmega]m", "*", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"1", "+", "x"}], ")"}], "^", "3"}]}], "+", 
+                    "\[CapitalOmega]l", "+", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    "1", "-", "\[CapitalOmega]m", "-", "\[CapitalOmega]l"}], 
+                    ")"}], 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"1", "+", "x"}], ")"}], "^", "2"}]}]}], "]"}]}], 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", "0", ",", "Z"}], "}"}]}], "]"}]}], 
+                   "]"}]}], ",", 
+                 RowBox[{
+                  RowBox[{
+                  "1", "-", "\[CapitalOmega]m", "-", "\[CapitalOmega]l"}], 
+                  "<", "0"}]}], "}"}]}], "}"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"NIntegrate", "[", 
+              RowBox[{
+               RowBox[{"1", "/", 
+                RowBox[{"Sqrt", "[", 
+                 RowBox[{
+                  RowBox[{"\[CapitalOmega]m", "*", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"1", "+", "x"}], ")"}], "^", "3"}]}], "+", 
+                  "\[CapitalOmega]l", "+", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{
+                    "1", "-", "\[CapitalOmega]m", "-", "\[CapitalOmega]l"}], 
+                    ")"}], 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"1", "+", "x"}], ")"}], "^", "2"}]}]}], "]"}]}], 
+               ",", 
+               RowBox[{"{", 
+                RowBox[{"x", ",", "0", ",", "Z"}], "}"}]}], "]"}]}], 
+            "]"}]}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+       "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"Z", ",", 
+        RowBox[{"JLAdata", "[", 
+         RowBox[{"[", 
+          RowBox[{"All", ",", "1"}], "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\[CapitalOmega]m", ",", "0.0", ",", "1.5", ",", 
+        RowBox[{"1.", "/", "100."}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\[CapitalOmega]l", ",", 
+        RowBox[{"-", ".5"}], ",", "1.5", ",", 
+        RowBox[{"1.", "/", "100."}]}], "}"}]}], "\[IndentingNewLine]", 
+     "]"}]}], ";"}], "//", "AbsoluteTiming"}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQAWIQzWVQnPdQ+LWj3ObrJSCaof5MFYi21jTpAtFt68/3
+gehVFhtngOi+/qMLQfSc2QzrQTRHjN0eEH1L0HofiJbYd/0oiD7NPPk4iN47
+S/EhiN7i1vwMRO86rvwdRJ84lgamr128xfQISIcECjCD6APOp0VA9A19e2kQ
+nfEtNQxEW2s8iwLRDpdeFIBooYP2hSDaQNqoEkS/XTOnH0RP+147DUQ/Or0Q
+TO+uUfoJoiP9roDprKpHf8H2ZMv/A9Eei+uWPQbSm/ZdANNFy/qO/RR57cj4
+8xKYPrqrz5FB9LXj5Wh5JxC9yrPxxyrl147Fux6AaQCZ1KrV
+  "]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "15658.81386000000020430888980627059936523437`10.215358774860634", ",", 
+   "Null"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.634303008811037*^9, {3.634303168445032*^9, 3.634303199296009*^9}, 
+   3.634304051285487*^9, {3.634304121688283*^9, 3.634304139495516*^9}, {
+   3.6343041898780823`*^9, 3.634304213412656*^9}, 3.634305013986723*^9, 
+   3.634326924047423*^9, 3.6355694927019*^9, 3.6355854966906633`*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.635569806085031*^9, 3.635569813138834*^9}, 
+   3.642578782796421*^9, {3.6425788779270983`*^9, 3.642578890909786*^9}}]
+},
+WindowSize->{1069, 755},
+WindowMargins->{{0, Automatic}, {Automatic, 5}},
+FrontEndVersion->"10.1 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 23, \
+2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 300, 8, 28, "Input"],
+Cell[CellGroupData[{
+Cell[882, 32, 8013, 190, 284, "Input"],
+Cell[8898, 224, 452, 9, 28, "Output"]
+}, Open  ]],
+Cell[9365, 236, 166, 2, 28, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
